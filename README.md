@@ -19,14 +19,15 @@ $ yarn add gulp-css-to-polymer
 ## Examples
 
 ```js
-var stylemod = require('gulp-css-to-polymer');
+const polymerizeCSS = require('gulp-css-to-polymer');
 
 // Wrap css files
 gulp.task("polymerize", () => {
     gulp.src("./src/**/*.css")
-        .pipe(stylemod({
+        .pipe(polymerizeCSS({
             prefix: 'tg-',
-            suffix: '-styles'
+            suffix: '-styles',
+            pwa: true
         }))
         .pipe(gulp.dest("./dist"));
 }
@@ -40,7 +41,9 @@ gulp.task("polymerize", () => {
     // string to be used for the beginning of the file name & module ids.
     prefix: 'tg-',
     // string to be used for the end of the file name & module ids.
-    suffix: '-styles'
+    suffix: '-styles',
+    // boolean, determines how the styles are generated as differentate between Polymer and Polymer PWA
+    pwa: true // default is false
 }
 ```
 
