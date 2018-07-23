@@ -43,7 +43,7 @@ module.exports = opts => through.obj((file, enc, cb) => {
     const moduleId = generateModuleName(opts, file);
     const dirname = path.dirname(file.path);
     const isPWA = !!opts.pwa;
-    const ignoreFiles = opts.ignore;
+    const ignoreFiles = opts.ignore || [];
 
     let res;
 
