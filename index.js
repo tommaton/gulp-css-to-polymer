@@ -39,31 +39,25 @@ const generatePWAStyle = (styles, moduleId) => (`import { html } from '@polymer/
 
 module.exports = opts => through.obj((file, enc, cb) => {
     const fileObj = file;
-    const fileName = path.basename(file.path);
+    // const fileName = path.basename(file.path);
     const moduleId = generateModuleName(opts, file);
     const dirname = path.dirname(file.path);
     const isPWA = !!opts.pwa;
-    const ignoreFiles = opts.ignore || [];
 
-    let res;
-
-    if (!ignoreFiles.includes(fileName)) {
-        if (file.isStream()) {
-            return cb(new gutil.PluginError(PLUGIN_NAME, 'Streaming not supported'));
-        }
-        if (file.isNull()) {
-            return cb(null, file);
-        }
-
-        res = (isPWA)
-            ? generatePWAStyle(file.contents, moduleId)
-            : generatePolymerStyle(file.contents, moduleId);
-
-        fileObj.contents = Buffer.from(res);
-        fileObj.path = `${path.join(dirname, moduleId)}.js`;
-
+    if (file.isStream()) {
+        return cb(new gutil.PluginError(PLUGIN_NAME, 'Streaming not supported'));
+    }
+    if (file.isNull()) {
         return cb(null, file);
     }
 
-    return null;
+    const res = (isPWA)
+        ? generatePWAStyle(file.contents, moduleId)
+        : generatePolymerStyle(file.contents, moduleId);
+
+    fileObj.contents = Buffer.from(res);
+    fileObj.path = `${path.join(dirname, moduleId)}.js`;
+
+    return cb(null, file);
+
 });

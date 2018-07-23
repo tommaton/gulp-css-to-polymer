@@ -44,8 +44,6 @@ gulp.task("polymerize", () => {
     suffix: '-styles',
     // boolean, determines how the styles are generated as differentate between Polymer and Polymer PWA
     pwa: true // default is false,
-    // array, an array of css files which you dont want to convert
-    ignore: ['navigation.css'] // default is false
 }
 ```
 
