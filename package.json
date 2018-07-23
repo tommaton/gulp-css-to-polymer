@@ -1,6 +1,6 @@
 {
   "name": "gulp-css-to-polymer",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Converting CSS to a ES6 Module for Polymer V3.x.x",
   "main": "index.js",
   "scripts": {
